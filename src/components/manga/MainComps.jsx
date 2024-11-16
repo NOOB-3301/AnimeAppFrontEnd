@@ -159,7 +159,7 @@ const NewEpisodesSection = () => {
                     </ModalTrigger>
                     <ModalBody>
                       <div ref={ref}></div>
-                      {imgUrl != '' ? (<img src={imgUrl} alt='imagess' />):(<div>Loading image....</div>) }
+                      {imgUrl != '' ? (<img src={imgUrl} className='h-[250px] w-[250px]' alt='imagess' />):(<div>Loading image....</div>) }
                       {manga.attributes?.title?.en || "Unknown Title"}
                     </ModalBody>
                   </Modal>
