@@ -1,38 +1,85 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 
-function App() {
-  const [images, setImages] = useState('');
-  const [clicked, setClicked] = useState(false);
+const manga_url = `https://manga-dex-api-server.vercel.app/api/v1/manga`;
 
-  const handleClick = async () => {
-    setClicked(!clicked);
+function App() {
+  const [search, setSearch] = useState('');
+  const [mangalist, setMangalist] = useState([]);
+  const [coverUrls, setCoverUrls] = useState({});
+
+  const fetchCoverImage = async (mangaId) => {
     try {
       const response = await axios.post(
         'https://manga-dex-api-image.vercel.app/proxy/mangadex-cover',
-        { mangaId: "8f3e1818-a015-491d-bd81-3addc4d7d56a" },
-        { responseType: 'blob' } // To handle image data correctly
+        { mangaId },
+        { responseType: 'blob' } // Handle image as a blob
       );
 
-      // Convert blob to URL for display
-      const imageUrl = URL.createObjectURL(response.data);
-      setImages(imageUrl);
+      // Convert blob to a URL
+      return URL.createObjectURL(response.data);
     } catch (error) {
-      console.error('Error fetching cover image:', error);
+      console.error(`Error fetching cover for mangaId ${mangaId}:`, error);
+      return null; // Return null if fetching fails
     }
   };
 
-  return clicked ? (
+  const handleClick = async () => {
+    try {
+      const resp = await axios.post(manga_url, { query: search });
+      const mangaData = resp.data.message.data;
+
+      setMangalist(mangaData);
+
+      // Fetch covers for each manga and map them by their ID
+      const covers = await Promise.all(
+        mangaData.map(async (manga) => {
+          const coverUrl = await fetchCoverImage(manga.id);
+          return { mangaId: manga.id, coverUrl };
+        })
+      );
+
+      // Convert to a lookup object for efficient rendering
+      const coverMap = covers.reduce((acc, curr) => {
+        if (curr.coverUrl) acc[curr.mangaId] = curr.coverUrl;
+        return acc;
+      }, {});
+
+      setCoverUrls(coverMap);
+    } catch (error) {
+      console.error('Error fetching manga list:', error);
+    }
+  };
+
+  return (
     <>
-      <div>hello</div>
-      <button onClick={handleClick}>hello</button>
-      {images && <img src={images} alt="Manga Cover" />}
-      <img src='https://uploads.mangadex.org/covers/8f3e1818-a015-491d-bd81-3addc4d7d56a/26dd2770-d383-42e9-a42b-32765a4d99c8.png' alt='hot link cover'/>
-      <img src="https://cmdxd98sb0x3yprd.mangadex.network/data/3d7805cecd4c06f8a94c59448ddcfb0c/U15-3a7a0a299f05f29dcfd4ed9ca93ee83b3a5c64dbebe35b9522f33941e8666fe5.png" alt="hot link chap" />
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search..."
+      />
+      <button onClick={handleClick}>Click to Search</button>
+
+      <div>
+        {mangalist.length > 0 ? (
+          mangalist.map((manga) => (
+            <div key={manga.id} style={{ marginBottom: '20px' }}>
+              <img
+                src={coverUrls[manga.id] || ''}
+                alt={`${manga.attributes.title.en} cover`}
+                style={{ width: '150px', height: '200px' }}
+                onError={(e) => (e.target.src = 'placeholder-image-url')} // Fallback image if the URL fails
+              />
+              <div>{manga.attributes.title.en}</div>
+            </div>
+          ))
+        ) : (
+          <p>No manga found</p>
+        )}
+      </div>
     </>
-  ) : (
-    <button onClick={handleClick}>click</button>
   );
 }
 
