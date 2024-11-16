@@ -10,7 +10,7 @@ function App() {
     setClicked(!clicked);
     try {
       const response = await axios.post(
-        'http://localhost:3000/proxy/mangadex-cover',
+        'https://manga-dex-api-image.vercel.app/proxy/mangadex-cover',
         { mangaId: "8f3e1818-a015-491d-bd81-3addc4d7d56a" },
         { responseType: 'blob' } // To handle image data correctly
       );
