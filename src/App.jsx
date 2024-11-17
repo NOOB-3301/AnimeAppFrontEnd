@@ -1,19 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState(
+    "https://cdn.pixabay.com/photo/2022/12/01/04/40/backpacker-7628303_640.jpg"
+  ); // Initial fallback image
+  const [isTransitioning, setIsTransitioning] = useState(false); // For controlling the transition
+
+  useEffect(() => {
+    const fetchBackgroundImage = async () => {
+      try {
+        // Fetch the image from the API
+        const response = await fetch("https://manga-dex-api-image.vercel.app/proxy/random", {
+          method: "GET",
+        });
+
+        if (response.ok) {
+          // Convert the response to a Blob
+          const blob = await response.blob();
+
+          // Convert the Blob to an image URL
+          const imageUrl = URL.createObjectURL(blob);
+
+          // Set the image URL after a delay for the transition effect
+          setIsTransitioning(true);
+          setTimeout(() => {
+            setBackgroundImage(imageUrl); // Change the background image after 5-6 seconds
+            setIsTransitioning(false);
+          }, 1000); // Wait for 1 second before applying the new image
+        } else {
+          console.error("Failed to fetch the background image");
+        }
+      } catch (error) {
+        console.error("Error fetching the background image:", error);
+      }
+    };
+
+
+    const intervalId = setInterval(() => {
+      fetchBackgroundImage();
+    }, 5000); // 5 seconds interval
+    return () => {
+      clearInterval(intervalId);
+    };
+    // Start fetching the background image after 5-6 seconds
+    // setTimeout(fetchBackgroundImage, 2000); // Fetch after 5 seconds
+    
+
+  }, []);
 
   return (
     <div
       className="min-h-screen bg-black text-white flex flex-col"
       style={{
-        backgroundImage: 'url("https://example.com/background.jpg")',
+        backgroundImage: `url("${backgroundImage}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundBlendMode: "overlay",
         backgroundColor: "rgba(0, 0, 0, 0.8)",
+        transition: isTransitioning ? "background-image 1s ease-in-out" : "none", // Transition effect
       }}
     >
       {/* Header */}
