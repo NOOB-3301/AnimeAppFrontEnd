@@ -1,90 +1,99 @@
-import { useState } from 'react';
-import {Link} from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const manga_url = `https://manga-dex-api-server.vercel.app/api/v1/manga`;
-
-function App() {
-  // const [search, setSearch] = useState('');
-  // const [mangalist, setMangalist] = useState([]);
-  // const [coverUrls, setCoverUrls] = useState({});
-
-  // const fetchCoverImage = async (mangaId) => {
-  //   try {
-  //     const response = await axios.post(
-  //       'https://manga-dex-api-image.vercel.app/proxy/mangadex-cover',
-  //       { mangaId },
-  //       { responseType: 'blob' } // Handle image as a blob
-  //     );
-
-  //     // Convert blob to a URL
-  //     return URL.createObjectURL(response.data);
-  //   } catch (error) {
-  //     console.error(`Error fetching cover for mangaId ${mangaId}:`, error);
-  //     return null; // Return null if fetching fails
-  //   }
-  // };
-
-  // const handleClick = async () => {
-  //   try {
-  //     const resp = await axios.post(manga_url, { query: search });
-  //     const mangaData = resp.data.message.data;
-  //     setMangalist(mangaData);
-
-  //     // Use a temporary object to store cover URLs
-  //     const tempCoverUrls = {};
-
-  //     // Fetch covers for all manga and update the temp object
-  //     await Promise.all(
-  //       mangaData.map(async (manga) => {
-  //         const coverUrl = await fetchCoverImage(manga.id);
-  //         if (coverUrl) {
-  //           tempCoverUrls[manga.id] = coverUrl;
-  //         }
-  //       })
-  //     );
-
-  //     // Update the state once after all URLs are fetched
-  //     setCoverUrls(tempCoverUrls);
-  //   } catch (error) {
-  //     console.error('Error fetching manga list:', error);
-  //   }
-  // };
-
+const LandingPage = () => {
   return (
-    // <>
-    //   <input
-    //     type="text"
-    //     value={search}
-    //     onChange={(e) => setSearch(e.target.value)}
-    //     placeholder="Search..."
-    //   />
-    //   <button onClick={handleClick}>Click to Search</button>
+    <div
+      className="min-h-screen bg-black text-white flex flex-col"
+      style={{
+        backgroundImage: 'url("https://example.com/background.jpg")', // Replace with a suitable anime-themed background image
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundBlendMode: "overlay",
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+      }}
+    >
+      {/* Header */}
+      <header className="flex items-center justify-between px-8 py-5">
+        <h1 className="text-4xl font-bold text-purple-400">AnimeHaven</h1>
+        <nav className="space-x-5 text-lg">
+          <Link to="/" className="hover:text-purple-400">
+            Home
+          </Link>
+          <Link to="/anime" className="hover:text-purple-400">
+            Anime
+          </Link>
+          <Link to="/manga/home" className="hover:text-purple-400">
+            Manga
+          </Link>
+          <Link to="/about" className="hover:text-purple-400">
+            About Us
+          </Link>
+        </nav>
+      </header>
 
-    //   <div>
-    //     {mangalist.length > 0 ? (
-    //       mangalist.map((manga) => (
-    //         <div key={manga.id} style={{ marginBottom: '20px' }}>
-    //           <img
-    //             src={coverUrls[manga.id] || 'placeholder-image-url'} // Use placeholder if the image isn't loaded
-    //             alt={`${manga.attributes.title.en} cover`}
-    //             style={{ width: '150px', height: '200px' }}
-    //           />
-    //           <div>{manga.attributes.title.en}</div>
-    //         </div>
-    //       ))
-    //     ) : (
-    //       <p>No manga found</p>
-    //     )}
-    //   </div>
-    // </>
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center text-center flex-grow px-8">
+        <h2 className="text-5xl font-bold mb-5 text-purple-500">
+          Dive into the World of Anime & Manga
+        </h2>
+        <p className="text-xl text-gray-300 max-w-2xl">
+          Discover, watch, and read your favorite anime and manga all in one place. Join our vibrant community of otakus today!
+        </p>
+        <div className="mt-8 space-x-4">
+          <Link
+            to="/anime"
+            className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-500"
+          >
+            Explore Anime
+          </Link>
+          <Link
+            to="/manga/home"
+            className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-500"
+          >
+            Browse Manga
+          </Link>
+        </div>
+      </section>
 
-    <>
-      this is landing page
-      <Link to={'/manga/home'}> go to manga home </Link>
+      {/* Features Section */}
+      <section className="bg-black/80 py-10 px-8">
+        <h3 className="text-3xl font-bold text-center text-purple-400 mb-10">
+          Why Choose AnimeHaven?
+        </h3>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-purple-700 p-5 rounded-lg shadow-lg text-center">
+            <h4 className="text-xl font-bold mb-3">Seamless Streaming</h4>
+            <p className="text-gray-300">
+              Watch your favorite anime in high quality without interruptions.
+            </p>
+          </div>
+          <div className="bg-purple-700 p-5 rounded-lg shadow-lg text-center">
+            <h4 className="text-xl font-bold mb-3">Vast Manga Library</h4>
+            <p className="text-gray-300">
+              Explore thousands of manga titles, from classics to the latest releases.
+            </p>
+          </div>
+          <div className="bg-purple-700 p-5 rounded-lg shadow-lg text-center">
+            <h4 className="text-xl font-bold mb-3">Community Features</h4>
+            <p className="text-gray-300">
+              Engage with other fans, rate your favorites, and share your thoughts.
+            </p>
+          </div>
+        </div>
+      </section>
 
-    </>
-
+      {/* Footer */}
+      <footer className="bg-purple-900 py-5 text-center">
+        <p className="text-gray-300">
+          © {new Date().getFullYear()} AnimeHaven. All rights reserved.
+        </p>
+        <p className="text-gray-400 text-sm">
+          Designed with ♥ for anime and manga lovers.
+        </p>
+      </footer>
+    </div>
   );
-}
+};
 
-export default App;
+export default LandingPage;

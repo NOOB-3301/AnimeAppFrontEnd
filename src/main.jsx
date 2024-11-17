@@ -7,6 +7,8 @@ import {
 import "./index.css";
 import App from "./App";
 import Mpage from "./components/manga/MPage.jsx";
+// import ReaderPage from "./components/manga/ReaderPage.jsx";
+import MangaRead from "./components/manga/ReaderPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,10 @@ const router = createBrowserRouter([
   {
     path:"/manga/home",
     element: <Mpage/>
+  },
+  {
+    path:"/manga/read/:id",
+    element: <MangaRead/>
   }
 ]);
 

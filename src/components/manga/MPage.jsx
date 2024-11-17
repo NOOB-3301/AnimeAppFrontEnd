@@ -53,7 +53,7 @@ function Mpage() {
 
   return (
     <>
-      <input
+      {/* <input
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -76,7 +76,7 @@ function Mpage() {
         ) : (
           <p>No manga found</p>
         )}
-      </div>
+      </div> */}
 
         <HomePage/>
 
