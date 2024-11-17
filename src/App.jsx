@@ -92,6 +92,9 @@ const LandingPage = () => {
           Designed with ♥ for anime and manga lovers.
         </p>
       </footer>
+
+      <img src="https://cmdxd98sb0x3yprd.mangadex.network/data/3d7805cecd4c06f8a94c59448ddcfb0c/U15-3a7a0a299f05f29dcfd4ed9ca93ee83b3a5c64dbebe35b9522f33941e8666fe5.png" alt="" />
+
     </div>
   );
 };
