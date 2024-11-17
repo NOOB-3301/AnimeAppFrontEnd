@@ -119,14 +119,14 @@ const ReaderPage = () => {
                       <h3 className="text-lg font-bold text-white">
                         Chapter Content
                       </h3>
-                      <p className="text-gray-300 mt-2">
-  {pagelist.length > 0 &&
-    pagelist.map((page) => {
-      // Generate and sanitize the URL
-      let url = `${chapurl}/${page}`.replace(/([^:]\/)\/+/g, '$1');
-      return <img key={page} src={url} alt="Manga Page" />;
-    })}
-</p>
+                        <p className="text-gray-300 mt-2">
+                        {pagelist.length > 0 &&
+                            pagelist.map((page) => {
+                            // Generate and sanitize the URL
+                            let url = `${chapurl}/${page}`.replace(/([^:]\/)\/+/g, '$1');
+                            return <img key={page} src={url} alt="Manga Page" />;
+                            })}
+                        </p>
 
 
                     </div>
