@@ -93,8 +93,8 @@ const LandingPage = () => {
         </p>
       </footer>
 
-      <img src="https://cmdxd98sb0x3yprd.mangadex.network/data/3d7805cecd4c06f8a94c59448ddcfb0c//U15-3a7a0a299f05f29dcfd4ed9ca93ee83b3a5c64dbebe35b9522f33941e8666fe5.png" alt="" />
-      <img src="https://cmdxd98sb0x3yprd.mangadex.network/data/cbec3b877c0b663902b7f80536bf8c90//1-08b8c46e0487c7f6ea953dc78dee1c503db25822b070dd3c83036f74c3cd5a22.jpg" alt=""></img>
+      {/* <img src="https://cmdxd98sb0x3yprd.mangadex.network/data/3d7805cecd4c06f8a94c59448ddcfb0c//U15-3a7a0a299f05f29dcfd4ed9ca93ee83b3a5c64dbebe35b9522f33941e8666fe5.png" alt="" />
+      <img src="https://cmdxd98sb0x3yprd.mangadex.network/data/cbec3b877c0b663902b7f80536bf8c90//1-08b8c46e0487c7f6ea953dc78dee1c503db25822b070dd3c83036f74c3cd5a22.jpg" alt=""></img> */}
     </div>
   );
 };
