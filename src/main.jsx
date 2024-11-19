@@ -9,6 +9,9 @@ import App from "./App";
 import Mpage from "./components/manga/MPage.jsx";
 // import ReaderPage from "./components/manga/ReaderPage.jsx";
 import MangaRead from "./components/manga/ReaderPage.jsx";
+import AnimeHome from "./components/anime/AnimeHome.jsx";
+import AnimeWatch from "./components/anime/AnimeWatch.jsx";
+import AnimeDetailsPage from "./components/anime/AnimeDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,19 @@ const router = createBrowserRouter([
   {
     path:"/manga/read/:id",
     element: <MangaRead/>
+  },
+  {
+    path:"/anime/home",
+    element:<AnimeHome/>
+  },
+  {
+    path:"/anime/details/:animeId",
+    element:<AnimeDetailsPage/>
+  },
+
+  {
+    path:"/anime/watch/:episodeId",
+    element:<AnimeWatch/>
   }
 ]);
 

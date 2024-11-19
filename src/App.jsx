@@ -147,7 +147,7 @@ const LandingPage = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <Link
-            to="/anime"
+            to="/anime/home"
             className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-500 transition duration-300"
           >
             Explore Anime
